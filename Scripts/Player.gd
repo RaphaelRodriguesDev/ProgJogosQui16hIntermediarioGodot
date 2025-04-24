@@ -83,7 +83,12 @@ func _set_animation():
 		$anim.play(anim);
 
 func knockback():
-	velocity.x = -knockback_dir * knockback_int
+	if $right.is_colliding():
+		velocity.x = -knockback_dir * knockback_int
+		
+	if $left.is_colliding():
+		velocity.x = knockback_dir * knockback_int
+		
 	velocity = move_and_slide(velocity)
 	
 func _on_hurtbox_body_entered(body: Node) -> void:
