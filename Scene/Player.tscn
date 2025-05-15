@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" type="Texture" id=2]
@@ -6,6 +6,33 @@
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Run (32x32).png" type="Texture" id=4]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Hit (32x32).png" type="Texture" id=5]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Fall (32x32).png" type="Texture" id=6]
+[ext_resource path="res://Assets/Effects/Dust Particle.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Effects/Shadow.png" type="Texture" id=8]
+
+[sub_resource type="Gradient" id=10]
+offsets = PoolRealArray( 0, 0.456835, 0.989209 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0 )
+
+[sub_resource type="GradientTexture" id=11]
+gradient = SubResource( 10 )
+
+[sub_resource type="Curve" id=12]
+_data = [ Vector2( 0, 0.503067 ), 0.0, 0.0, 0, 0, Vector2( 1, 1 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="CurveTexture" id=13]
+curve = SubResource( 12 )
+
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 50.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 1.5
+scale_random = 0.8
+scale_curve = SubResource( 13 )
+color_ramp = SubResource( 11 )
 
 [sub_resource type="Animation" id=1]
 length = 0.001
@@ -250,12 +277,6 @@ extents = Vector2( 9, 10.5 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 12, 8.5 )
 
-[sub_resource type="ParticlesMaterial" id=9]
-flag_disable_z = true
-gravity = Vector3( 0, 98, 0 )
-orbit_velocity = 0.0
-orbit_velocity_random = 0.0
-
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 166, 81 )
 collision_mask = 94
@@ -263,6 +284,20 @@ script = ExtResource( 1 )
 __meta__ = {
 "_edit_group_": true
 }
+
+[node name="steps_fx" type="Particles2D" parent="."]
+position = Vector2( -7, 13 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+amount = 10
+randomness = 0.5
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
+
+[node name="Shadow" type="Sprite" parent="."]
+position = Vector2( 0, 14 )
+scale = Vector2( 1, 0.375 )
+texture = ExtResource( 8 )
 
 [node name="texture" type="Sprite" parent="."]
 texture = ExtResource( 2 )
@@ -331,8 +366,5 @@ position = Vector2( 0, 5 )
 enabled = true
 cast_to = Vector2( 20, 0 )
 collision_mask = 2
-
-[node name="steps_fx" type="Particles2D" parent="."]
-process_material = SubResource( 9 )
 
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
