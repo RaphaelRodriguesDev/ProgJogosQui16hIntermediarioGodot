@@ -1520,7 +1520,7 @@ position = Vector2( 1318, 177 )
 position = Vector2( 2039, 79 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 16, 94 )
+position = Vector2( 1863, -108 )
 
 [node name="Enemies" type="Node2D" parent="."]
 

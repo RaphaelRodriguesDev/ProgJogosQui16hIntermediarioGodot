@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" type="Texture" id=2]
@@ -250,6 +250,12 @@ extents = Vector2( 9, 10.5 )
 [sub_resource type="RectangleShape2D" id=8]
 extents = Vector2( 12, 8.5 )
 
+[sub_resource type="ParticlesMaterial" id=9]
+flag_disable_z = true
+gravity = Vector3( 0, 98, 0 )
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+
 [node name="Player" type="KinematicBody2D"]
 position = Vector2( 166, 81 )
 collision_mask = 94
@@ -325,5 +331,8 @@ position = Vector2( 0, 5 )
 enabled = true
 cast_to = Vector2( 20, 0 )
 collision_mask = 2
+
+[node name="steps_fx" type="Particles2D" parent="."]
+process_material = SubResource( 9 )
 
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
