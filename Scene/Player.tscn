@@ -286,11 +286,14 @@ __meta__ = {
 }
 
 [node name="steps_fx" type="Particles2D" parent="."]
-position = Vector2( -7, 13 )
+position = Vector2( -9, 14 )
 rotation = 3.14159
 scale = Vector2( 1, -1 )
+emitting = false
 amount = 10
-randomness = 0.5
+lifetime = 0.5
+one_shot = true
+randomness = 0.7
 process_material = SubResource( 9 )
 texture = ExtResource( 7 )
 
