@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=2]
+[gd_scene load_steps=96 format=2]
 
 [ext_resource path="res://Scripts/Reset_Level.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Fall-zone.gd" type="Script" id=2]
@@ -19,6 +19,8 @@
 [ext_resource path="res://New Piskel (1).png" type="Texture" id=17]
 [ext_resource path="res://Assets/Parallax/5 - Sky_color.png" type="Texture" id=18]
 [ext_resource path="res://Assets/Terrain/Textures-16.png" type="Texture" id=19]
+[ext_resource path="res://Prefabs/Transition_in.tscn" type="PackedScene" id=20]
+[ext_resource path="res://Prefabs/Transition_out.tscn" type="PackedScene" id=21]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1996,6 +1998,10 @@ position = Vector2( 371, 115 )
 horizontal = false
 
 [node name="HUD" parent="." instance=ExtResource( 9 )]
+
+[node name="Transition_in" parent="." instance=ExtResource( 20 )]
+
+[node name="Transition_out" parent="." instance=ExtResource( 21 )]
 
 [connection signal="body_entered" from="fall-zone" to="fall-zone" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="fall-zone2" to="fall-zone2" method="_on_fallzone_body_entered"]
