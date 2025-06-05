@@ -113,3 +113,8 @@ func gameOver() -> void:
 	if player_health < 1:
 		queue_free()
 		get_tree().change_scene("res://Prefabs/GameOver.tscn")
+
+
+func _on_headCollider_body_entered(body: Node) -> void:
+	if body.has_method("destroy"):
+		body.destroy()
