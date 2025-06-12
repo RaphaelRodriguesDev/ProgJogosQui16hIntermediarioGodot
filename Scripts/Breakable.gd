@@ -28,4 +28,13 @@ func destroy():
 				get_parent().add_child(rigid)
 				rigid.apply_impulse(Vector2.ZERO, Vector2(rand_range(-50, 50), rand_range(-100, -150)))
 		queue_free()
-	
+	else:
+		create_fruit()
+		$anim.play("hit")
+		
+func create_fruit():
+	var fruit_number = round(rand_range(0, fruit_instance.size() -1))
+	var fruit = fruit_instance[fruit_number].instance()
+	fruit.global_position = $spawnPoint.global_position
+	fruit.apply_impulse(Vector2.ZERO, Vector2(rand_range(30, -30), -80))
+	get_parent().call_deferred("add_child", fruit)
