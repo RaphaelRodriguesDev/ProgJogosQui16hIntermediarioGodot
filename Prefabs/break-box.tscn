@@ -165,8 +165,6 @@ tracks/3/keys = {
 collision_layer = 16
 collision_mask = 0
 script = ExtResource( 3 )
-fruit_instance = [ null ]
-fruits = 20
 
 [node name="texture" type="Sprite" parent="."]
 texture = ExtResource( 1 )
