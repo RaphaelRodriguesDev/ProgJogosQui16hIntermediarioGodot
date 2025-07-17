@@ -1534,9 +1534,6 @@ position = Vector2( 1318, 177 )
 position = Vector2( 2039, 79 )
 path = "res://Levels/Level_02.tscn"
 
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1863, -108 )
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource( 11 )]
@@ -1626,6 +1623,9 @@ position = Vector2( 179, 77 )
 
 [node name="plantie" parent="." instance=ExtResource( 22 )]
 position = Vector2( 293, 49 )
+
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 31, 96 )
 
 [connection signal="body_entered" from="fall-zone" to="fall-zone" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="fall-zone2" to="fall-zone2" method="_on_fallzone_body_entered"]
