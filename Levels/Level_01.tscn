@@ -1534,10 +1534,13 @@ position = Vector2( 1318, 177 )
 position = Vector2( 2039, 79 )
 path = "res://Levels/Level_02.tscn"
 
+[node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( 1863, -108 )
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="Mushroom" parent="Enemies" instance=ExtResource( 11 )]
-position = Vector2( 257, 131 )
+position = Vector2( 948, -166 )
 collision_mask = 9
 
 [node name="Mushroom2" parent="Enemies" instance=ExtResource( 11 )]
@@ -1573,7 +1576,7 @@ scale = Vector2( 1.5, 1.5 )
 [node name="bananas" type="Node2D" parent="."]
 
 [node name="banana" parent="bananas" instance=ExtResource( 10 )]
-position = Vector2( 261, 88 )
+position = Vector2( 294, 41 )
 
 [node name="banana2" parent="bananas" instance=ExtResource( 10 )]
 position = Vector2( 401, 132 )
@@ -1609,23 +1612,38 @@ horizontal = false
 
 [node name="HUD" parent="." instance=ExtResource( 16 )]
 
+[node name="score" parent="HUD/VBoxContainer/Holder3" index="1"]
+margin_left = 36.0
+margin_top = -10.0
+margin_right = 91.0
+margin_bottom = 32.0
+
 [node name="Transition_in" parent="." instance=ExtResource( 19 )]
 visible = false
 
 [node name="break-box" parent="." instance=ExtResource( 20 )]
-position = Vector2( 93, 75 )
+position = Vector2( 154, 71 )
 
 [node name="break-box2" parent="." instance=ExtResource( 20 )]
-position = Vector2( 69, 75 )
+position = Vector2( 746, 102 )
+
+[node name="break-box3" parent="." instance=ExtResource( 20 )]
+position = Vector2( 1901, -34 )
+
+[node name="break-box4" parent="." instance=ExtResource( 20 )]
+position = Vector2( 1043, -100 )
+
+[node name="break-box5" parent="." instance=ExtResource( 20 )]
+position = Vector2( 944, 121 )
 
 [node name="Birdie" parent="." instance=ExtResource( 21 )]
-position = Vector2( 179, 77 )
+position = Vector2( 1361, 76 )
+
+[node name="Birdie2" parent="." instance=ExtResource( 21 )]
+position = Vector2( 1670, 143 )
 
 [node name="plantie" parent="." instance=ExtResource( 22 )]
-position = Vector2( 293, 49 )
-
-[node name="Player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 31, 96 )
+position = Vector2( 315, 48 )
 
 [connection signal="body_entered" from="fall-zone" to="fall-zone" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="fall-zone2" to="fall-zone2" method="_on_fallzone_body_entered"]

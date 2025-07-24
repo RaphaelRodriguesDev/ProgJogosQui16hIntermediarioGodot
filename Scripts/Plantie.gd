@@ -1,11 +1,16 @@
 extends KinematicBody2D
 
 var facing_left = true
+var hitted = false
+var health = 3
 
 onready var bullet_instance = preload("res://Scene/seed.tscn")
 onready var player = Global.get("player")
 
 func _physics_process(_delta) -> void:
+	_set_animation()
+	
+	
 	if player:
 		var distance = player.global_position.x - self.position.x
 		facing_left = true if distance < 0 else false
@@ -20,7 +25,20 @@ func shoot():
 	get_parent().add_child(bullet)
 	bullet.global_position = $spawnShoot.global_position
 	
-
+func _set_animation():
+	var anim = "idle"
+	
+	if $playerDetector.overlaps_body(player):
+		anim = "attack"
+		
+	else:
+		anim = "idle";
+		
+	if hitted == true:
+		anim = "hit";
+		
+	if $anim.assigned_animation != anim:
+		$anim.play(anim)
 
 func _on_playerDetector_body_entered(body):
 	$anim.play("attack")
@@ -31,4 +49,11 @@ func _on_playerDetector_body_exited(body: Node) -> void:
 
 
 func _on_hitbox_body_entered(body: Node) -> void:
-	queue_free()
+	hitted = true;
+	health -= 1;
+	body.velocity.y = body.jump_force / 2;
+	yield(get_tree().create_timer(0.2), "timeout");
+	hitted = false
+	if health < 1:
+		queue_free();
+		get_node("hitbox/collision").set_deferred("disable",true)

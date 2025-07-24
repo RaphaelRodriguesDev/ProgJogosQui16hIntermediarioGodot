@@ -1,5 +1,7 @@
 extends KinematicBody2D
 class_name EnemyBase
+
+
 export var speed = 64;
 export var health = 3;
 var motion = Vector2.ZERO;
@@ -11,7 +13,6 @@ var move_direction = -1;
 func _physics_process(delta: float) -> void:
 	motion.x = speed * move_direction;
 	
-	
 	if move_direction == 1:
 		$texture.flip_h = true;
 	else:
@@ -22,6 +23,7 @@ func _physics_process(delta: float) -> void:
 	motion = move_and_slide(motion);
 func apply_gravity(delta):
 	motion.y += gravity * delta
+	
 func _on_anim_animation_finished(anim_name: String) -> void:
 	if anim_name == "idle":
 		
@@ -58,7 +60,7 @@ func _set_animation():
 func _on_hitbox_body_entered(body: Node) -> void:
 	hitted = true;
 	health -= 1;
-	body  .velocity.y = body.jump_force / 2;
+	body.velocity.y = body.jump_force / 2;
 	yield(get_tree().create_timer(0.2), "timeout");
 	hitted = false
 	if health < 1:
