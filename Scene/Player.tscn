@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://Scripts/Player.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Idle (32x32).png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://Assets/Main Characters/Ninja Frog/Fall (32x32).png" type="Texture" id=6]
 [ext_resource path="res://Assets/Effects/Dust Particle.png" type="Texture" id=7]
 [ext_resource path="res://Assets/Effects/Shadow.png" type="Texture" id=8]
+[ext_resource path="res://Sounds/jump1.ogg" type="AudioStream" id=9]
 
 [sub_resource type="Gradient" id=10]
 offsets = PoolRealArray( 0, 0.456835, 0.989209 )
@@ -325,13 +326,13 @@ shape = SubResource( 3 )
 [node name="raycasts" type="Node2D" parent="."]
 
 [node name="raycast" type="RayCast2D" parent="raycasts"]
-position = Vector2( -7, 7 )
+position = Vector2( -8, 11 )
 enabled = true
 cast_to = Vector2( 0, 15 )
 collision_mask = 89
 
 [node name="raycast2" type="RayCast2D" parent="raycasts"]
-position = Vector2( 9, 7 )
+position = Vector2( 10, 11 )
 enabled = true
 cast_to = Vector2( 0, 15 )
 collision_mask = 89
@@ -382,5 +383,9 @@ __meta__ = {
 position = Vector2( 0, -8 )
 shape = SubResource( 14 )
 
+[node name="jumpFx" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource( 9 )
+
+[connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="body_entered" from="headCollider" to="." method="_on_headCollider_body_entered"]

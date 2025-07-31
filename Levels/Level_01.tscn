@@ -1645,6 +1645,9 @@ position = Vector2( 1670, 143 )
 [node name="plantie" parent="." instance=ExtResource( 22 )]
 position = Vector2( 315, 48 )
 
+[node name="Birdie3" parent="." instance=ExtResource( 21 )]
+position = Vector2( 46, 16 )
+
 [connection signal="body_entered" from="fall-zone" to="fall-zone" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="fall-zone2" to="fall-zone2" method="_on_fallzone_body_entered"]
 

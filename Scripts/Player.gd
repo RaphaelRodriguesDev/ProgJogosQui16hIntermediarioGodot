@@ -95,7 +95,7 @@ func knockback():
 		
 	velocity = move_and_slide(velocity)
 	
-func _on_hurtbox_body_entered(body: Node) -> void:
+func _on_hurtbox_body_entered(_body: Node) -> void:
 	player_health -= 1
 	hurted = true
 	emit_signal("change_life", player_health)
@@ -104,7 +104,7 @@ func _on_hurtbox_body_entered(body: Node) -> void:
 	yield(get_tree().create_timer(0.5),"timeout")
 	get_node("hurtbox/collision").set_deferred("disabled", false)
 	hurted = false
-	gameOver();
+	gameOver()
 	
 
 func hit_checkpoint():
@@ -119,3 +119,15 @@ func gameOver() -> void:
 func _on_headCollider_body_entered(body: Node) -> void:
 	if body.has_method("destroy"):
 		body.destroy()
+
+
+func _on_hurtbox_area_entered(area: Area2D) -> void:
+	player_health -= 1
+	hurted = true
+	emit_signal("change_life", player_health)
+	knockback()
+	get_node("hurtbox/collision").set_deferred("disabled", true)
+	yield(get_tree().create_timer(0.5),"timeout")
+	get_node("hurtbox/collision").set_deferred("disabled", false)
+	hurted = false
+	gameOver()

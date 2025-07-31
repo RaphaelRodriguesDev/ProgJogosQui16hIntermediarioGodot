@@ -214,8 +214,7 @@ anims/idle = SubResource( 4 )
 position = Vector2( -22, -23 )
 
 [node name="playerDetector" type="Area2D" parent="."]
-visible = false
-collision_layer = 2
+collision_layer = 0
 
 [node name="collision" type="CollisionShape2D" parent="playerDetector"]
 position = Vector2( 0, -16 )

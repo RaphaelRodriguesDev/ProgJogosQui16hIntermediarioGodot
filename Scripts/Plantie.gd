@@ -10,7 +10,6 @@ onready var player = Global.get("player")
 func _physics_process(_delta) -> void:
 	_set_animation()
 	
-	
 	if player:
 		var distance = player.global_position.x - self.position.x
 		facing_left = true if distance < 0 else false
@@ -24,6 +23,10 @@ func shoot():
 	var bullet = bullet_instance.instance()
 	get_parent().add_child(bullet)
 	bullet.global_position = $spawnShoot.global_position
+	if facing_left:
+		bullet.direction = 1
+	else:
+		bullet.direction = -1
 	
 func _set_animation():
 	var anim = "idle"
