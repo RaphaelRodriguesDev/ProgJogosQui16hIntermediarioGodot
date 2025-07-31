@@ -385,6 +385,7 @@ shape = SubResource( 14 )
 
 [node name="jumpFx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
+volume_db = -25.0
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]

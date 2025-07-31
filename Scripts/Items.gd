@@ -3,6 +3,7 @@ extends Area2D
 export var fruits = 1
 
 func _on_apple_body_entered(body):
+	$collectedFx.play()
 	$anim.play("collected");
 	Global.fruits += fruits
 	print(Global.fruits)
