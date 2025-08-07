@@ -235,6 +235,7 @@ tracks/2/keys = {
 [sub_resource type="Animation" id=5]
 resource_name = "run"
 length = 1.1
+loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("texture:texture")
 tracks/0/interp = 1
@@ -326,15 +327,15 @@ shape = SubResource( 3 )
 [node name="raycasts" type="Node2D" parent="."]
 
 [node name="raycast" type="RayCast2D" parent="raycasts"]
-position = Vector2( -8, 11 )
+position = Vector2( -7, 10 )
 enabled = true
-cast_to = Vector2( 0, 15 )
+cast_to = Vector2( 0, 12 )
 collision_mask = 89
 
 [node name="raycast2" type="RayCast2D" parent="raycasts"]
-position = Vector2( 10, 11 )
+position = Vector2( 8, 10 )
 enabled = true
-cast_to = Vector2( 0, 15 )
+cast_to = Vector2( 0, 12 )
 collision_mask = 89
 
 [node name="camera" type="Camera2D" parent="."]
@@ -386,6 +387,11 @@ shape = SubResource( 14 )
 [node name="jumpFx" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 9 )
 volume_db = -25.0
+
+[node name="pushRight" type="RayCast2D" parent="."]
+position = Vector2( 8, 4 )
+cast_to = Vector2( 6, 0 )
+collision_mask = 128
 
 [connection signal="area_entered" from="hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="hurtbox" to="." method="_on_hurtbox_body_entered"]
