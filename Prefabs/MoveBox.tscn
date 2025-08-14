@@ -7,6 +7,8 @@ extents = Vector2( 8, 8 )
 
 [node name="MoveBox" type="KinematicBody2D"]
 collision_layer = 136
+collision_mask = 9
+collision/safe_margin = 0.001
 
 [node name="texture" type="Sprite" parent="."]
 texture = ExtResource( 1 )

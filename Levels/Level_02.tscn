@@ -1,4 +1,4 @@
-[gd_scene load_steps=96 format=2]
+[gd_scene load_steps=97 format=2]
 
 [ext_resource path="res://Scripts/Reset_Level.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/Fall-zone.gd" type="Script" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Assets/Terrain/Textures-16.png" type="Texture" id=19]
 [ext_resource path="res://Prefabs/Transition_in.tscn" type="PackedScene" id=20]
 [ext_resource path="res://Prefabs/Transition_out.tscn" type="PackedScene" id=21]
+[ext_resource path="res://Prefabs/trampoline.tscn" type="PackedScene" id=22]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -1991,6 +1992,9 @@ visible = false
 
 [node name="Transition_out" parent="." instance=ExtResource( 21 )]
 visible = false
+
+[node name="trampoline" parent="." instance=ExtResource( 22 )]
+position = Vector2( 592, 143 )
 
 [connection signal="body_entered" from="fall-zone" to="fall-zone" method="_on_fallzone_body_entered"]
 [connection signal="body_entered" from="fall-zone2" to="fall-zone2" method="_on_fallzone_body_entered"]

@@ -8,13 +8,15 @@ var gravity = 1200;
 var jump_force = -720;
 var is_grounded;
 
-var player_health = 3;
+#var player_health = 3;
 var max_health = 3
 
 var hurted = false;
 
 var knockback_dir = 1;
 var knockback_int = 500
+
+var is_pushing = false
 
 onready var raycasts = $raycasts;
 
@@ -37,7 +39,16 @@ func _physics_process(delta: float) -> void:
 	if $pushRight.is_colliding():
 		var object = $pushRight.get_collider()
 		object.move_and_slide(Vector2(30,0) * move_speed * delta)
+		is_pushing = true
+		
+	elif $pushLeft.is_colliding():
+		var object = $pushLeft.get_collider()
+		object.move_and_slide(Vector2(-30,0) * move_speed * delta)
+		is_pushing = true
 	
+	else:
+		is_pushing = false
+		
 	velocity = move_and_slide(velocity, UP);
 	
 	is_grounded = _check_is_ground();
@@ -65,6 +76,11 @@ func _get_input():
 		$pushRight.set_enabled(true)
 	else:
 		$pushRight.set_enabled(false)
+		
+	if velocity.x < -1:
+		$pushLeft.set_enabled(true)
+	else:
+		$pushLeft.set_enabled(false)
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("jump") and is_grounded:
@@ -83,7 +99,7 @@ func _set_animation():
 	if !is_grounded:
 		anim = "jump"
 		
-	elif velocity.x != 0:
+	elif velocity.x != 0 or is_pushing:
 		anim = "run"
 		$steps_fx.set_emitting(true)
 		
@@ -106,9 +122,9 @@ func knockback():
 	velocity = move_and_slide(velocity)
 	
 func _on_hurtbox_body_entered(_body: Node) -> void:
-	player_health -= 1
+	Global.player_health -= 1
 	hurted = true
-	emit_signal("change_life", player_health)
+	emit_signal("change_life", Global.player_health)
 	knockback()
 	get_node("hurtbox/collision").set_deferred("disabled", true)
 	yield(get_tree().create_timer(0.5),"timeout")
@@ -121,7 +137,7 @@ func hit_checkpoint():
 	Global.checkpoint_pos = position.x
 
 func gameOver() -> void:
-	if player_health < 1:
+	if Global.player_health < 1:
 		queue_free()
 		get_tree().change_scene("res://Prefabs/GameOver.tscn")
 
@@ -132,9 +148,9 @@ func _on_headCollider_body_entered(body: Node) -> void:
 
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
-	player_health -= 1
+	Global.player_health -= 1
 	hurted = true
-	emit_signal("change_life", player_health)
+	emit_signal("change_life", Global.player_health)
 	knockback()
 	get_node("hurtbox/collision").set_deferred("disabled", true)
 	yield(get_tree().create_timer(0.5),"timeout")
